@@ -21,12 +21,6 @@
     <link rel="stylesheet" href="css/jquery.fileupload.css">
     <link rel="stylesheet" href="css/jquery.fileupload-ui.css">
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-
   </head>
 
   <body>
@@ -64,7 +58,7 @@
         <h1>Upload Here</h1>
       </div>
       
-      <blockquote>Your My Clippings.txt can be found in....
+      <blockquote>Your My Clippings.txt can be found in...
       </blockquote>
       
       <form action="upload_file.php" method="post" enctype="multipart/form-data">
@@ -80,7 +74,12 @@
         <p class="text-center">Copyright @ Zchan</p>
       </div>
     </div>
-    
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
   
   </body>
 </html>

@@ -72,10 +72,59 @@ function extractSave($fp)
 	}
 }
 
+
 /*
- *	从数据库中提取数据
+ *	从数据库中提取数据并显示
  */
 
+function showNote()
+{
+	$db  		 = connectDB();
 
+	$sql_bname   = "SELECT DISTINCT bookname FROM note";
+	$result      = $db->query($sql_bname);
+
+	while ($row  = $result->fetch_assoc()) {
+		$bname   = $row['bookname'];
+		$flag	 = false;
+		$sql 	 = "SELECT * FROM note WHERE bookname LIKE '%".$bname."%'";
+		$res     = $db->query($sql);
+		while ($list = $res->fetch_assoc()) {
+			echo "<div class='col-md-3'>";
+					if (!$flag) {
+						echo "<h3><span class='label label-default'>".$bname."</span></h3>";
+						$flag = true;
+					}
+			echo   "</div>";
+
+			echo "<div class='col-md-8'>";
+				echo	"<div class='panel panel-default'>";
+
+			echo "<div class='panel-heading'>
+                	<div class='row'>
+                    	<div class='col-md-8 col-sm-12'>";
+                        	echo "".$list['bookname']."<br>";
+                        	echo "by ".$list['author']."<br>
+                		</div>
+                	</div>
+		          </div><!--heading-->
+		          <div class='panel-body'>
+		                <div class='row'>
+		                    <p class = 'text-right'><em>";
+		                    	echo "时间 ".$list['time']."<br>位置 ".$list['location']."</em></p>
+		                </div>
+		                <div class='row'>
+		                    <blockquote>
+		                        <p>".$list['content']."<br></p>
+		                    </blockquote>
+		                </div> 
+		            </div><!--body-->
+		        </div><!--panel-->
+		    </div><!--col-->";
+		}
+	}
+
+
+}
 
 ?>

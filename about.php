@@ -15,12 +15,6 @@
     <!-- Custom styles for this template -->
     <link href="css/sticky-footer-navbar.css" rel="stylesheet">
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-
 </head>
 <body>
 
@@ -42,19 +36,33 @@
 
           <ul class="nav navbar-nav">
             <li class="active"><a href="index.php">Home</a></li>
-            <li><a href="export.php">Export</a></li>
+            <li><a href="export.php">Show</a></li>
             <li><a href="about.php">About</a></li>     
           </ul>
 
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+  
+  <div class = "container theme-showcase" role = "main">
+
+    <div class="jumbotron">
+        <p>Kindle, 人类文明进步的电梯</p>
+        <p><a href="http://www.amazon.cn/dp/B00KDRNYO4/ref=sv_kinc_0" class="btn btn-primary btn-lg" role="button" align="center">了解更多 »</a></p>
+      </div>
+  </div>
 
 	<div class="footer">
       <div class="container">
         <p class="text-center">Copyright @ Zchan</p>
       </div>
     </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
 </body>
 </html>

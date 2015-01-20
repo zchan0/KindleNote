@@ -18,15 +18,8 @@
 
     <!-- Custom styles for this template -->
     <link href="css/sticky-footer-navbar.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <link href="css/custom.css" rel="stylesheet">
 
 </head>
 <body>
@@ -48,7 +41,7 @@
 
           <ul class="nav navbar-nav">
             <li class="active"><a href="index.php">Home</a></li>
-            <li><a href="export.php">Export</a></li>
+            <li><a href="export.php">Show</a></li>
             <li><a href="about.php">About</a></li>     
           </ul>
 
@@ -57,7 +50,7 @@
     </nav>
 
     <!-- Begin page content -->
-    <div class="container-fluid">
+    <div class="container">
 
     <?php
         include_once 'func.php';
@@ -80,28 +73,11 @@
         }else
         	echo "select query error.";
         
-        //  从数据库中读取数据并显示       
-    ?>
+        echo "<span class='label label-success'><a href='topdf.php'>导出为PDF</a></span>";
 
-    <div class="col-md-8">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-md-8 col-sm-12">
-                        书名<br>
-                        by 作者
-                    </div>
-                    <div class="col-md-4 hidden-xs">
-                        时间<br>
-                        位置
-                    </div>
-                </div>
-            </div><!--heading-->
-            <div class="panel-body">
-             内容   
-            </div><!--body-->
-        </div>
-    </div>
+        //  从数据库中读取数据并显示
+        showNote();       
+    ?>
 
 	</div><!-- container-->
 
@@ -110,6 +86,12 @@
         <p class="text-center">Copyright @ Zchan</p>
       </div>
     </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
 </body>
 </html>
