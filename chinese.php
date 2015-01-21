@@ -263,6 +263,7 @@ function MBWrite($h, $txt, $link)
 		}
 		if(!$ascii || $c==' ')
 			$sep = $i;
+		ob_clean(); 
 		$l += $ascii ? $cw[$c] : 1000;
 		if($l>$wmax)
 		{

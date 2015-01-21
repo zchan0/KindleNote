@@ -51,6 +51,9 @@ while ($row  = $result->fetch_assoc()) {
             $flag = true;
         }
         //echo $list['content']."<br>Loc. ".$list['location']."<br><br>"; 
+        if ($list['note']) {
+            $list['content'] .= "\n"."Notes:\n".$list['note'];
+        }
         $content = $list['content']."Loc. ".$list['location']."\n";
         $content_array[] = $content;
         
