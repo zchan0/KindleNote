@@ -35,7 +35,6 @@ $db          = connectDB();
 $sql_bname   = "SELECT DISTINCT bookname FROM note";
 $result      = $db->query($sql_bname);
 
-$bookmark    = "- Bookmark ";
 $bname_content = array();
 
 while ($row  = $result->fetch_assoc()) {
@@ -51,11 +50,10 @@ while ($row  = $result->fetch_assoc()) {
             $title = $bname.", ".$list['author'];
             $flag = true;
         }
-        if (!($list['type']=== $bookmark)) {
-            //echo $list['content']."<br>Loc. ".$list['location']."<br><br>"; 
-            $content = $list['content']."Loc. ".$list['location']."\n";
-            $content_array[] = $content;
-        }
+        //echo $list['content']."<br>Loc. ".$list['location']."<br><br>"; 
+        $content = $list['content']."Loc. ".$list['location']."\n";
+        $content_array[] = $content;
+        
     }
     $bname_content[$title] = $content_array;
 }
@@ -87,9 +85,9 @@ foreach ($bname_content as $title => $content_array) {
     for ($i=0; $i < count($content_array); $i++) { 
         $content = $content_array[$i];
         $pdf->SetFont('sinfang','',11); 
-        $pdf->Write(8, iconv("utf-8", "gbk", "(".($i+1).") ".$content));
+        $pdf->Write(8, iconv("utf-8", "gbk", "(".($i+1).")\t".$content));
     }
-    $pdf->Write(3, "\n");
+    $pdf->Write(3, "\n");   // 两本书之间的空格
 }
 
 $pdf->Output();

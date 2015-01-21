@@ -16,10 +16,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/sticky-footer-navbar.css" rel="stylesheet">
-
-    <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-    <link rel="stylesheet" href="css/jquery.fileupload.css">
-    <link rel="stylesheet" href="css/jquery.fileupload-ui.css">
+    <href="css/custom.css" rel="stylesheet">
 
   </head>
 
@@ -43,7 +40,7 @@
 
           <ul class="nav navbar-nav">
             <li class="active"><a href="index.php">Home</a></li>
-            <li><a href="export.php">Show</a></li>
+            <li><a href="export.php">Note</a></li>
             <li><a href="about.php">About</a></li>     
           </ul>
 
@@ -71,7 +68,7 @@
 
     <div class="footer">
       <div class="container">
-        <p class="text-center">Copyright @ Zchan</p>
+        <p class="text-center">Copyright © 2015 <a href="https://github.com/zchan0">Zchan</a></p>
       </div>
     </div>
 

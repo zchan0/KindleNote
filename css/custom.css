@@ -1,1 +1,10 @@
 a { color: #fff; }
+.hrtitle {
+margin-top: 20px;
+font-size:  1em;
+color: gray;
+}
+hr {
+margin-top: 0;
+margin-bottom: 10px;
+}

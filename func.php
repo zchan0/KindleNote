@@ -18,10 +18,11 @@ function extractSave($fp)
 {
 	$db = connectDB();
 
-	$note           = '- Note';
-	$bookmark       = '- Bookmark';
+	$note           = 'Note';
+	$bookmark       = "Bookmark";
 	$loc_delimiter  = 'Loc.';
 	$time_delimiter = '| Added on ';
+	$bname_note		= array();
 
     $row_cnt = 0;
 	//	读取文件内容
@@ -35,15 +36,15 @@ function extractSave($fp)
                 $bname    = $first[0];
                 $author   = $first[1];
                 $author   = explode(')', $author);
-                $author   = $author[0];
+                $author   = trim($author[0]);
                 break;
             case '1':
                 $row_cnt ++;
                 $second   = explode($time_delimiter, $line);
                 $time     = $second[1];
                 $type_loc = explode($loc_delimiter, $second[0]);
-                $type     = $type_loc[0];
-                $loc      = $type_loc[1];
+                $type     = trim($type_loc[0], '-');$type = trim($type);	// 清除字符串中的空格和'-'
+                $loc      = trim($type_loc[1]);
                 break;
             case '2':
                 $row_cnt ++;
@@ -54,16 +55,28 @@ function extractSave($fp)
                 break;
             case '4':
                 $row_cnt = 0;
-                $link = "INSERT INTO note (time, location, content, type, bookname, author) VALUES ('".$time."', '".$loc."', '".$content."', '".$type."', '".$bname."', '".$author."' )";
-                $res  = $db->query($link);
-                /*
-                if (!$res) {
-                    echo "书名: ".$bname."<br>"." 作者: ".$author."<br>";
-                    echo "类型: ".$type."<br>"." 位置: ".$loc."<br>"." 时间: ".$time."<br>";
-                    echo "内容:".$content."<br>";
-                    echo "<br><br>";
-                    echo "插入失败<br>";
-                }*/
+                if ($type === $note) {
+                	$note_link = "SELECT * FROM note WHERE bookname LIKE '%".$bname."%'";
+                	$note_res  = $db->query($note_link);
+                	while ($row = $note_res->fetch_assoc()) {
+                		$db_loc = $row['location'];
+                		$tmp_loc= explode('-', $db_loc);
+                		$location= $tmp_loc[0];
+                		if ($loc - $location == 1) {
+                			if ($row['note']){
+                				$content = $row['note']."\n".$content;
+                			}
+                			$note_sql = "UPDATE note SET note = '".addslashes($content)."' 
+                			WHERE bookname LIKE '%".$bname."%' AND location LIKE '%".$db_loc."%'";
+                			//var_dump($note_sql);
+                			$nres = $db->query($note_sql);
+                		}
+                	}
+                }elseif ($type != $bookmark) {
+                	$link = "INSERT INTO note (time, location, content, type, bookname, author) VALUES ('".$time."', '".$loc."', '".$content."', '".$type."', '".$bname."', '".$author."' )";
+	                $res  = $db->query($link);
+                }
+                
                 break;
             
             default:
@@ -117,8 +130,19 @@ function showNote()
 		                    <blockquote>
 		                        <p>".$list['content']."<br></p>
 		                    </blockquote>
-		                </div> 
-		            </div><!--body-->
+		                </div>";
+
+		               if ($list['note']) {
+		                	echo "<div class='col-md-12'>
+				                	<div class='hrtitle'> Notes</div>
+				                	<hr>
+				                	<em>".$list['note']."</em>		              
+				                 </div>";
+		                }
+		                
+
+
+		    echo    "</div><!--body-->
 		        </div><!--panel-->
 		    </div><!--col-->";
 		}
