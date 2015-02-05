@@ -1,4 +1,5 @@
 <?php	
+error_reporting(E_ALL^E_WARNING);
 
 function connectDB()
 {
@@ -14,8 +15,19 @@ function connectDB()
 function clearFile()
 {
 	$db   = connectDB();
-	$link = "TRUNCATE file";
-	$res  = $db->query($link);
+
+	// 如果已经上传过文件，删除对应的文件
+	$dest_dir = 'uploads';
+	$sql      = "SELECT * FROM file";
+    $result   = $db->query($sql);
+    if ($result) {
+    	$row  = $result->fetch_assoc();   	
+        $path = $dest_dir.'/'.$row['filename'];
+        unlink($path);
+
+        $link = "TRUNCATE file";	// 清空表file
+		$res  = $db->query($link);
+    }
 	
 }
 

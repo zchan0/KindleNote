@@ -67,6 +67,8 @@
 			include_once 'func.php';
 
 			clearFile();
+
+
 		    /* 设定上传目录 */
 		    $dest_dir='uploads';
 		 
@@ -78,7 +80,7 @@
 		 
 		    /* 设置允许上传文件的类型 */
 		    $type=array("rar","zip","txt","c");
-		 
+		    
 		    /* 获取上传文件信息 */
 		    $upfile= $_FILES['file'];
 		 

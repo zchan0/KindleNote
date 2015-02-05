@@ -71,14 +71,16 @@
         	}
             clearNote();
             extractSave($fp);
+
+            echo "<span class='label label-success'><a href='topdf.php'>导出为PDF</a></span>";
+
+            //  从数据库中读取数据并显示
+            showNote();   
                        
         }else
         	echo "select query error.";
         
-        echo "<span class='label label-success'><a href='topdf.php'>导出为PDF</a></span>";
-
-        //  从数据库中读取数据并显示
-        showNote();       
+            
     ?>
 
 	</div><!-- container-->
