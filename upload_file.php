@@ -107,12 +107,8 @@
 		        if ($state)
 		        {
 
-		        	$db = new mysqli('localhost', 'root', '1a2b', 'KindleNote');
+		        	$db   = connectDB();
 
-		        	if(mysqli_connect_error()){
-		        		echo "Error:Could not connect to database.";
-		        		exit;
-		        	}
 		        	$filename = date("ymdHis")."_".$upfile['name'];
 		        	$sql = "INSERT INTO file VALUES ('".$filename."')";
 		            $result = $db->query($sql);

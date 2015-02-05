@@ -5,16 +5,15 @@ function connectDB()
 {
 	$db = new mysqli('localhost', 'root', '1a2b', 'KindleNote');
 	date_default_timezone_set('PRC');
-	if(mysqli_connect_error()){
-		echo "Error:Could not connect to database.";
-		exit;
+	if(!$db){
+		die('Could not connect: ' . mysql_error());
 	}
 	return $db;
 }
 
 function clearFile()
 {
-	$db   = connectDB();
+	$db  = connectDB();
 
 	// 如果已经上传过文件，删除对应的文件
 	$dest_dir = 'uploads';
