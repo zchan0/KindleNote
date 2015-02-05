@@ -64,7 +64,9 @@
       </blockquote>
 		<?php
 			include 'conn.php';
+			include_once 'func.php';
 
+			clearFile();
 		    /* 设定上传目录 */
 		    $dest_dir='uploads';
 		 

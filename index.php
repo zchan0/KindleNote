@@ -16,7 +16,6 @@
 
     <!-- Custom styles for this template -->
     <link href="css/sticky-footer-navbar.css" rel="stylesheet">
-    <href="css/custom.css" rel="stylesheet">
 
   </head>
 
@@ -68,7 +67,7 @@
 
     <div class="footer">
       <div class="container">
-        <p class="text-center">Copyright © 2015 <a href="https://github.com/zchan0">Zchan</a></p>
+        <p class="text-center">Copyright © 2015 Zchan</p>
       </div>
     </div>
 

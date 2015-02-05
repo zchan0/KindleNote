@@ -36,9 +36,9 @@
         <div id="navbar" class="collapse navbar-collapse">
 
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.php">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             <li><a href="export.php">Note</a></li>
-            <li><a href="about.php">About</a></li>     
+            <li class="active"><a href="about.php">About</a></li>     
           </ul>
 
         </div><!--/.nav-collapse -->
@@ -55,7 +55,7 @@
 
 	<div class="footer">
       <div class="container">
-        <p class="text-center">Copyright © 2015 <a href="https://github.com/zchan0">Zchan</a></p>
+        <p class="text-center">Copyright © 2015 Zchan</p>
       </div>
     </div>
 

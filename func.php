@@ -11,6 +11,22 @@ function connectDB()
 	return $db;
 }
 
+function clearFile()
+{
+	$db   = connectDB();
+	$link = "TRUNCATE file";
+	$res  = $db->query($link);
+	
+}
+
+
+function clearNote()	
+{
+	$db   = connectDB();
+	$link = "TRUNCATE note";
+	$res  = $db->query($link);
+}
+
 /*
  *	按格式分割数据，存入数据库	
  */
@@ -18,15 +34,19 @@ function extractSave($fp)
 {
 	$db = connectDB();
 
-	$note           = 'Note';
-	$bookmark       = "Bookmark";
-	$loc_delimiter  = 'Loc.';
-	$time_delimiter = '| Added on ';
-	$bname_note		= array();
+	$note        	   = 'Note';
+	$note_zh           = '笔记';
+	$bookmark    	   = "Bookmark";
+	$bookmark_zh	   = '书签';
+	$loc_delimiter     = 'Loc.';
+	$loc_delimiter_zh  = '#';
+	$type_delimiter	   = '的';
+	$time_delimiter    = '| Added on ';
+	$time_delimiter_zh = '| 添加于 ';
+	$bname_note		   = array();
 
     $row_cnt = 0;
 	//	读取文件内容
-    //  可能要除掉文件最后一行的回车
 	while (!feof($fp)) {
 		$line = fgetss($fp);
         switch ($row_cnt) {
@@ -40,11 +60,21 @@ function extractSave($fp)
                 break;
             case '1':
                 $row_cnt ++;
-                $second   = explode($time_delimiter, $line);
-                $time     = $second[1];
-                $type_loc = explode($loc_delimiter, $second[0]);
-                $type     = trim($type_loc[0], '-');$type = trim($type);	// 清除字符串中的空格和'-'
-                $loc      = trim($type_loc[1]);
+                if( !strpos($line, $time_delimiter_zh)){
+                	$second   = explode($time_delimiter, $line);
+	                $time     = $second[1];
+	                $type_loc = explode($loc_delimiter, $second[0]);
+	                $type     = trim($type_loc[0], '-');$type = trim($type);	// 清除字符串中的空格和'-'
+	                $loc      = trim($type_loc[1]);
+	            }else{
+	            	$second_  = explode($time_delimiter_zh, $line);
+	            	$time  	  = $second_[1];
+	            	$type_loc = explode($loc_delimiter_zh, $second_[0]);
+	            	$typeloc  = $type_loc[1];
+	            	$tmp      = explode($type_delimiter, $typeloc);
+	            	$loc  	  = trim($tmp[0]);
+	            	$type     = trim($tmp[1]);
+	            }
                 break;
             case '2':
                 $row_cnt ++;
@@ -55,14 +85,14 @@ function extractSave($fp)
                 break;
             case '4':
                 $row_cnt = 0;
-                if ($type === $note) {
+                if (($type == $note) || ($type == $note_zh)) {
                 	$note_link = "SELECT * FROM note WHERE bookname LIKE '%".$bname."%'";
                 	$note_res  = $db->query($note_link);
                 	while ($row = $note_res->fetch_assoc()) {
                 		$db_loc = $row['location'];
                 		$tmp_loc= explode('-', $db_loc);
                 		$location= $tmp_loc[0];
-                		if ($loc - $location == 1) {
+                		if ($loc - $location <= 1) {
                 			if ($row['note']){
                 				$content = $row['note']."\n".$content;
                 			}
@@ -72,7 +102,7 @@ function extractSave($fp)
                 			$nres = $db->query($note_sql);
                 		}
                 	}
-                }elseif ($type != $bookmark) {
+                }elseif (($type != $bookmark) && ($type != $bookmark_zh)) {
                 	$link = "INSERT INTO note (time, location, content, type, bookname, author) VALUES ('".$time."', '".$loc."', '".$content."', '".$type."', '".$bname."', '".$author."' )";
 	                $res  = $db->query($link);
                 }
