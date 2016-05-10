@@ -12,7 +12,7 @@
 + 导出为PDF
 + 支持中文的MyClippings文件 2015/02/06 
 
-##Todo
+##Todo(Deprecated)
 
 + 导出到Evernote
 + 编辑笔记内容
