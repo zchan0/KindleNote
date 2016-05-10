@@ -3,8 +3,8 @@
 ##简介
 
 将Kindle的My Clippings.txt中的内容格式化输出。
-![demo](http://i2.tietuku.com/a08af6fb2d473fe2.png)
-![demo1](http://i2.tietuku.com/d75fe5c4a11722e3.png)
+![demo](http://i2.buimg.com/a08af6fb2d473fe2.png)
+![demo1](http://i2.buimg.com/d75fe5c4a11722e3.png)
 
 ##已完成
 
